@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as tc from '@actions/tool-cache'
+import * as fs from 'fs'
 
 async function run(): Promise<void> {
   try {
@@ -9,12 +10,14 @@ async function run(): Promise<void> {
     if (UnityPath != null) {
       const UnitySetup64 = await tc.downloadTool(
         'https://netstorage.unity3d.com/unity/bbf64de26e34/Windows64EditorInstaller/UnitySetup64-2019.2.18f1.exe',
-        'UnitySetup.exe'
+        '.\\UnitySetup.exe'
       )
 
-      core.debug(`Downloaded ${UnitySetup64}`)
+      const stat = fs.statSync(UnitySetup64)
 
-      await exec.exec(UnitySetup64, [
+      core.debug(`Downloaded ${stat}`)
+
+      await exec.exec(fs.realpathSync(UnitySetup64), [
         '/S',
         '/D=C:\\Program Files\\Unity_2019.2.18'
       ])

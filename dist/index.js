@@ -1267,14 +1267,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const exec = __importStar(__webpack_require__(986));
 const tc = __importStar(__webpack_require__(533));
+const fs = __importStar(__webpack_require__(747));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let UnityPath = tc.find('unity', '2019.2.18');
             if (UnityPath != null) {
-                const UnitySetup64 = yield tc.downloadTool('https://netstorage.unity3d.com/unity/bbf64de26e34/Windows64EditorInstaller/UnitySetup64-2019.2.18f1.exe', 'UnitySetup.exe');
-                core.debug(`Downloaded ${UnitySetup64}`);
-                yield exec.exec(UnitySetup64, [
+                const UnitySetup64 = yield tc.downloadTool('https://netstorage.unity3d.com/unity/bbf64de26e34/Windows64EditorInstaller/UnitySetup64-2019.2.18f1.exe', '.\\UnitySetup.exe');
+                const stat = fs.statSync(UnitySetup64);
+                core.debug(`Downloaded ${stat}`);
+                yield exec.exec(fs.realpathSync(UnitySetup64), [
                     '/S',
                     '/D=C:\\Program Files\\Unity_2019.2.18'
                 ]);
