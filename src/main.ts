@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
+import * as tc from '@actions/tool-cache';
 
 import {wait} from './wait'
 
