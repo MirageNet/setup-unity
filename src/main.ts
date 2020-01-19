@@ -35,7 +35,9 @@ async function run(): Promise<void> {
 
         const license = core.getInput('license')
 
-        if (license != null) {
+        core.debug(`received license ${license}`)
+
+        if (license !== '') {
             fs.writeFileSync('unity-license.ulf', license)
 
             await exec.exec('Unity.exe', [
