@@ -1276,11 +1276,9 @@ function run() {
             if (UnityPath != null) {
                 const UnitySetup64 = yield tc.downloadTool('https://netstorage.unity3d.com/unity/bbf64de26e34/Windows64EditorInstaller/UnitySetup64-2019.2.18f1.exe', '.\\UnitySetup.exe');
                 core.debug(`Running under ${os.platform()}`);
-                yield exec.exec(fs.realpathSync(UnitySetup64), [
-                    '/S',
-                    '/D=C:\\Program Files\\Unity_2019.2.18'
-                ]);
-                UnityPath = yield tc.cacheDir('C:\\Program Files\\Unity_2019.2.18', 'unity', '2019.2.18', os.platform());
+                const exitCode = yield exec.exec(fs.realpathSync(UnitySetup64), ['/S']);
+                core.debug(`exit code ${exitCode}`);
+                UnityPath = yield tc.cacheDir('C:\\Program Files\\Unity', 'unity', '2019.2.18', os.platform());
             }
             core.addPath(`${UnityPath}\\Editor\\`);
             yield exec.exec('Unity.exe', [

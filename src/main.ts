@@ -15,13 +15,11 @@ async function run(): Promise<void> {
       )
 
       core.debug(`Running under ${os.platform()}`)
-      await exec.exec(fs.realpathSync(UnitySetup64), [
-        '/S',
-        '/D=C:\\Program Files\\Unity_2019.2.18'
-      ])
+      const exitCode = await exec.exec(fs.realpathSync(UnitySetup64), ['/S'])
+      core.debug(`exit code ${exitCode}`)
 
       UnityPath = await tc.cacheDir(
-        'C:\\Program Files\\Unity_2019.2.18',
+        'C:\\Program Files\\Unity',
         'unity',
         '2019.2.18',
         os.platform()
