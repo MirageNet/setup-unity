@@ -1286,7 +1286,6 @@ function run() {
             }
             core.addPath(`${UnityPath}\\Editor`);
             const license = core.getInput('license');
-            core.debug(`received license ${license}`);
             if (license !== '' && license !== null) {
                 fs.writeFileSync('unity-license.ulf', license);
                 yield exec.exec('Unity.exe', [

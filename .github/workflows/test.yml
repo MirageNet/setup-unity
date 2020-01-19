@@ -21,10 +21,15 @@ jobs:
     - uses: ./
 
     - name: Create Activation File
-      run: Unity -quit -batchmode -nographics -createManualActivationFile
+      run: |
+        Unity -nographics -createManualActivationFile -batchmode -logFile /dev/stdout
+        rename Unity_*.alf Unity.alf
 
+    
     - name: Upload Activation File
       uses: actions/upload-artifact@v1
       with:
-        name: activation
-        path: 'Unity*.alf'
+        name: Activation File
+        path: 'Unity.alf'
+        # upload this file to https://license.unity3d.com/manual
+        # add the result as a secret called UNITY_LICENSE
