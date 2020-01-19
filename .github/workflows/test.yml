@@ -19,5 +19,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: ./
-      with: 
-        license: something
+
+    - name: Create Activation File
+      run: Unity -quit -batchmode -nographics -createManualActivationFile
+
+    - name: Upload Activation File
+      uses: actions/upload-artifact@v1
+      with:
+        name: activation
+        path: 'Unity*.alf'
