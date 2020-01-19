@@ -8,8 +8,12 @@ async function run(): Promise<void> {
 
     if (UnityPath != null) {
       const UnitySetup64 = await tc.downloadTool(
-        'https://netstorage.unity3d.com/unity/bbf64de26e34/Windows64EditorInstaller/UnitySetup64-2019.2.18f1.exe'
+        'https://netstorage.unity3d.com/unity/bbf64de26e34/Windows64EditorInstaller/UnitySetup64-2019.2.18f1.exe',
+        'UnitySetup.exe'
       )
+
+      core.debug(`Downloaded ${UnitySetup64}`)
+
       await exec.exec(UnitySetup64, [
         '/S',
         '/D=C:\\Program Files\\Unity_2019.2.18'
