@@ -23,23 +23,6 @@ async function run(): Promise<void> {
     }
 
     core.addPath(`${UnityPath}\\Editor\\`)
-
-    /*
-    const node12ExtractedFolder = await tc.extractTar(node12Path, 'path/to/extract/to');
-
-const cachedPath = await tc.cacheDir(node12ExtractedFolder, 'node', '12.7.0');
-core.addPath(cachedPath);
-*/
-    /*
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`)
-
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    core.setOutput('time', new Date().toTimeString())
-    */
   } catch (error) {
     core.setFailed(error.message)
   }
