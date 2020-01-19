@@ -2,8 +2,6 @@ import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as tc from '@actions/tool-cache'
 
-import {wait} from './wait'
-
 async function run(): Promise<void> {
   try {
     let UnityPath = tc.find('unity', '2019.2.18')
