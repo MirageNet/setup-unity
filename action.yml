@@ -4,7 +4,8 @@ author: 'Your name or organization here'
 inputs:
     license:
         description: 'Unity manual license'
-        required: true
+        required: false
+        default: ''
 runs:
     using: 'node12'
     main: 'dist/index.js'
