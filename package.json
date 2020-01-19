@@ -2,7 +2,7 @@
   "name": "typescript-action",
   "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Install unity 3d",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -22,10 +22,11 @@
     "node",
     "setup"
   ],
-  "author": "YourNameOrOrganization",
+  "author": "MirrorNG",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.0"
+    "@actions/core": "^1.2.0",
+    "@actions/exec": "^1.0.3"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
