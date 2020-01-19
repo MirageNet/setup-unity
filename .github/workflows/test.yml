@@ -23,7 +23,7 @@ jobs:
     - name: Create Activation File
       run: |
         Unity -nographics -createManualActivationFile -batchmode -logFile /dev/stdout
-        rename Unity_*.alf Unity.alf
+        Rename-Item -Path Unity_*.alf -NewName Unity.alf
 
     
     - name: Upload Activation File
