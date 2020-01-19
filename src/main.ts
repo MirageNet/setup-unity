@@ -32,7 +32,7 @@ async function run(): Promise<void> {
 const cachedPath = await tc.cacheDir(node12ExtractedFolder, 'node', '12.7.0');
 core.addPath(cachedPath);
 */
-
+/*
     const ms: string = core.getInput('milliseconds')
     core.debug(`Waiting ${ms} milliseconds ...`)
 
@@ -41,6 +41,7 @@ core.addPath(cachedPath);
     core.debug(new Date().toTimeString())
 
     core.setOutput('time', new Date().toTimeString())
+    */
   } catch (error) {
     core.setFailed(error.message)
   }
