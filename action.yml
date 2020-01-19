@@ -6,6 +6,15 @@ inputs:
         description: 'Unity manual license'
         required: false
         default: ''
+    installer:
+        description: "Url of the unity editor installer"
+        required: false
+        default: 'https://netstorage.unity3d.com/unity/bbf64de26e34/Windows64EditorInstaller/UnitySetup64-2019.2.18f1.exe'
+    version:
+        description: "Unity version"
+        required: false
+        default: '2019.2.18'
+
 runs:
     using: 'node12'
     main: 'dist/index.js'

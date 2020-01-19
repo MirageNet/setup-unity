@@ -1272,15 +1272,17 @@ const os = __importStar(__webpack_require__(87));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let UnityPath = tc.find('unity', '2019.2.18', os.platform());
+            const installerUrl = core.getInput('installer');
+            const unityVersion = core.getInput('version');
+            let UnityPath = tc.find('unity', unityVersion, os.platform());
             if (UnityPath != null) {
-                const UnitySetup64 = yield tc.downloadTool('https://netstorage.unity3d.com/unity/bbf64de26e34/Windows64EditorInstaller/UnitySetup64-2019.2.18f1.exe', '.\\UnitySetup.exe');
+                const UnitySetup64 = yield tc.downloadTool(installerUrl, '.\\UnitySetup.exe');
                 core.debug(`Running under ${os.platform()}`);
                 const exitCode = yield exec.exec(fs.realpathSync(UnitySetup64), [
                     '/S'
                 ]);
                 core.debug(`exit code ${exitCode}`);
-                UnityPath = yield tc.cacheDir('C:\\Program Files\\Unity', 'unity', '2019.2.18', os.platform());
+                UnityPath = yield tc.cacheDir('C:\\Program Files\\Unity', 'unity', unityVersion, os.platform());
             }
             core.addPath(`${UnityPath}\\Editor`);
             const license = core.getInput('license');
