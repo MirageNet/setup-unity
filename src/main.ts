@@ -2,10 +2,11 @@ import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as tc from '@actions/tool-cache'
 import * as fs from 'fs'
+import * as os from 'os'
 
 async function run(): Promise<void> {
   try {
-    let UnityPath = tc.find('unity', '2019.2.18')
+    let UnityPath = tc.find('unity', '2019.2.18', os.platform())
 
     if (UnityPath != null) {
       const UnitySetup64 = await tc.downloadTool(
@@ -13,10 +14,7 @@ async function run(): Promise<void> {
         '.\\UnitySetup.exe'
       )
 
-      const stat = fs.statSync(UnitySetup64)
-
-      core.debug(`Downloaded ${stat}`)
-
+      core.debug(`Running under ${os.platform()}`)
       await exec.exec(fs.realpathSync(UnitySetup64), [
         '/S',
         '/D=C:\\Program Files\\Unity_2019.2.18'
@@ -25,11 +23,19 @@ async function run(): Promise<void> {
       UnityPath = await tc.cacheDir(
         'C:\\Program Files\\Unity_2019.2.18',
         'unity',
-        '2019.2.18'
+        '2019.2.18',
+        os.platform()
       )
     }
 
     core.addPath(`${UnityPath}\\Editor\\`)
+
+    await exec.exec('Unity.exe', [
+      '-nographics',
+      '-quit',
+      '-batch',
+      '-batchmode'
+    ])
   } catch (error) {
     core.setFailed(error.message)
   }
